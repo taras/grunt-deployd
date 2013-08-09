@@ -1,0 +1,43 @@
+{
+  "name": "grunt-deployd",
+  "description": "Provides task to start deployd server",
+  "version": "0.1.0",
+  "homepage": "https://github.com/taras/grunt-deployd",
+  "author": {
+    "name": "Taras Mankovski",
+    "email": "tarasm@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/taras/grunt-deployd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/taras/grunt-deployd/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/taras/grunt-deployd/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1",
+    "deployd": "~0.6.10"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
