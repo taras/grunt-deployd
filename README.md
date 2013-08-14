@@ -55,6 +55,17 @@ grunt.initConfig({
 })
 ```
 
+**You have to add deployd:dev or deployd:prod to your task runner**
+
+```js
+grunt.task.run( [
+        'deployd:dev',
+        'configureProxies:server',
+        'connect:server',
+        'qunit'
+      ] );
+```
+
 ### Accessing API Endpoints ###
 By default, this package will run your API endpoint on the port that you specified in ```options.port```. This is not very pretty when your app runs on a different port. You end up having you app on port 9000 ( or 80 ) and your API endpoints on port 7777.
 
