@@ -1,11 +1,9 @@
 # grunt-deployd
 
-> Provides task to start deployd server
+> Start and run [deployd.com](http://deployd.com/) API server while your Grunt task is running.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
-
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
 npm install grunt-deployd --save-dev
@@ -20,67 +18,64 @@ grunt.loadNpmTasks('grunt-deployd');
 ## The "deployd" task
 
 ### Overview
-In your project's Gruntfile, add a section named `deployd` to the data object passed into `grunt.initConfig()`.
-
-```js
-grunt.initConfig({
-  deployd: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
-})
-```
-
-### Options
-
-#### options.separator
-Type: `String`
-Default value: `',  '`
-
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+* Your deployd server will start on the port that you specify in ```options.port``` property. 
+* You have to specify ```options.db.name``` for your database, otherwise Grunt won't know what database should be used.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
 ```js
 grunt.initConfig({
   deployd: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+     dev: {
+        options: {
+          port: 7777,
+          db: {
+            host: 'localhost',
+            port: 27017,
+            name: 'development'
+          },
+          env: 'development'
+        }
+      },
+      prod: {
+        options: {
+          port: 7777,
+          db: {
+            port: 27017,
+            name: 'production',
+            host: 'localhost',
+            credentials: {
+              username: 'prod_user',
+              password: 'prod_pass'
+            }
+          },
+          env: 'production'
+        }
+      } },
 })
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+### Accessing API Endpoints ###
+By default, this package will run your API endpoint on the port that you specified in ```options.port```. This is not very pretty when your app runs on a different port. You end up having you app on port 9000 ( or 80 ) and your API endpoints on port 7777.
 
-```js
-grunt.initConfig({
-  deployd: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+To make your API endpoints accessible on the same port, you can use an HTTP Proxy. I included an example of how to use [grunt-connect-proxy](https://github.com/drewzboto/grunt-connect-proxy) to proxy your API to /api directory on same port as the connect server.
+
+**Look in Gruntfile.js for an example of running a deployd server with a proxy**
+
+### Running tests
+* This package includes **Gruntfile.js** that allows you to run tests of this package
+
+#### Installation of tests ####
+
+To install the tests, run ```# npm install```
+
+#### Running in browser ####
+
+To run tests in the browser, run ```# grunt test:dev```
+
+#### Running headless #####
+
+To run headless tests, run ```# grunt```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
