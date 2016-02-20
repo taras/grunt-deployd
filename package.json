@@ -37,9 +37,10 @@
     "deployd": "git://github.com/deployd/deployd.git#master"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": ">=0.4.0"
   },
   "keywords": [
-    "gruntplugin", "deployd"
+    "gruntplugin",
+    "deployd"
   ]
 }
